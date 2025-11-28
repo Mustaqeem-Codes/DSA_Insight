@@ -1,0 +1,78 @@
+.navbar {
+  position: sticky;        /* sticks to top while scrolling */
+  top: 0;                  /* stick to top */
+  z-index: 1000;           /* above other content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 30px;
+
+  background-color: rgba(255, 255, 255, 0.7); /* semi-transparent */
+  backdrop-filter: blur(10px);  /* blur content behind navbar */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  font-family: sans-serif;
+}
+
+
+/* Left section: icon + text */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 10px gap between icon and text */
+}
+
+.nav-icon {
+  font-size: 28px;
+}
+
+.nav-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.nav-title {
+  font-size: 20px;
+  font-weight: 600;
+  /* Gradient text */
+  background-image: linear-gradient(to right, #4f46e5, #0891b2);
+  -webkit-background-clip: text; /* clip gradient to text */
+  -webkit-text-fill-color: transparent; /* make text itself transparent */
+  background-clip: text; /* for non-webkit browsers */
+  color: transparent;
+}
+
+
+.nav-tagline {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+/* Right section: Read Docs button */
+.read-docs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background-color: #111827;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: 0.2s ease-in-out;
+}
+
+.read-docs-btn:hover {
+  background-color: #1f2937;
+}
+
+.book-icon {
+  font-size: 15px;
+}
+.nav-icon {
+  width: 36px;      /* set desired width */
+  height: 36px;     /* set desired height */
+  object-fit: contain; /* keeps aspect ratio */
+}
