@@ -1,19 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Grid,
   Layers,
   ListOrdered,
   Link as LinkIcon,
   GitBranch,
-  Network,
-  Hash,
-  Binary,
-  Type,
 } from "lucide-react";
 import "../styles/Cards.css";
 import "../styles/Button.css";
 
 const Cards = () => {
+  const navigate = useNavigate(); // React Router navigation
+
   const dataStructures = [
     {
       id: "array",
@@ -22,7 +21,7 @@ const Cards = () => {
       icon: <Grid className="ds-icon-img" />,
       color: "blue-gradient",
       category: "linear",
-      path: "/visualize/array", // Add path for routing
+      path: "/array",
     },
     {
       id: "stack",
@@ -31,7 +30,7 @@ const Cards = () => {
       icon: <Layers className="ds-icon-img" />,
       color: "emerald-gradient",
       category: "linear",
-      path: "/visualize/stack", // Add path for routing
+      path: "/stack",
     },
     {
       id: "queue",
@@ -40,7 +39,7 @@ const Cards = () => {
       icon: <ListOrdered className="ds-icon-img" />,
       color: "violet-gradient",
       category: "linear",
-      path: "/visualize/queue", // Add path for routing
+      path: "/queue",
     },
     {
       id: "linked-list",
@@ -49,7 +48,7 @@ const Cards = () => {
       icon: <LinkIcon className="ds-icon-img" />,
       color: "indigo-gradient",
       category: "linear",
-      path: "/visualize/linked-list", // Add path for routing
+      path: "/linked-list",
     },
     {
       id: "binary-search-tree",
@@ -57,51 +56,12 @@ const Cards = () => {
       description: "Hierarchical sorted tree structure",
       icon: <GitBranch className="ds-icon-img" />,
       color: "amber-gradient",
-      category: "non-linear",
-      path: "/BST_Page.jsx", // Add path for routing
+      path: "/bst", // ✅ must be /bst
     },
-    // {
-    //   id: "graph",
-    //   name: "Graph",
-    //   description: "Nodes and edges structure",
-    //   icon: <Network className="ds-icon-img" />,
-    //   color: "rose-gradient",
-    //   category: "non-linear",
-    //   path: "/visualize/graph", // Add path for routing
-    // },
-    // {
-    //   id: "hash-table",
-    //   name: "Hash Table",
-    //   description: "Key-value mapping",
-    //   icon: <Hash className="ds-icon-img" />,
-    //   color: "purple-gradient",
-    //   category: "hash",
-    //   path: "/visualize/hash-table", // Add path for routing
-    // },
-    // {
-    //   id: "heap",
-    //   name: "Heap",
-    //   description: "Complete binary tree",
-    //   icon: <Binary className="ds-icon-img" />,
-    //   color: "sky-gradient",
-    //   category: "tree",
-    //   path: "/visualize/heap", // Add path for routing
-    // },
-    // {
-    //   id: "trie",
-    //   name: "Trie",
-    //   description: "Prefix tree structure",
-    //   icon: <Type className="ds-icon-img" />,
-    //   color: "green-gradient",
-    //   category: "tree",
-    //   path: "/visualize/trie", // Add path for routing
-    // },
   ];
 
-  // Function to handle card click
   const handleCardClick = (path) => {
-    window.location.href = path; // Simple navigation
-    // Or if using React Router: navigate(path);
+    navigate(path);
   };
 
   return (
@@ -112,6 +72,7 @@ const Cards = () => {
           Click on any data structure to start visualizing
         </p>
       </div>
+
       <div className="data-structures-grid">
         {dataStructures.map((ds) => (
           <div
@@ -120,22 +81,18 @@ const Cards = () => {
             onClick={() => handleCardClick(ds.path)}
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                handleCardClick(ds.path);
-              }
-            }}
           >
             <div className="ds-card-header">
               <div className={`ds-icon ${ds.color}`}>{ds.icon}</div>
               <h3 className="ds-name">{ds.name}</h3>
               <p className="ds-description">{ds.description}</p>
             </div>
+
             <div className="ds-card-content">
-              <button 
+              <button
                 className="btn btn-ghost visualize-button"
                 onClick={(e) => {
-                  e.stopPropagation(); // Prevent card click when button is clicked
+                  e.stopPropagation();
                   handleCardClick(ds.path);
                 }}
               >
