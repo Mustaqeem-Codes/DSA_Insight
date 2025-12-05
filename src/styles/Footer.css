@@ -1,0 +1,183 @@
+/* --- DSA Modern Footer Styles --- */
+.footer-dsa {
+    /* Base: Dark background for high contrast */
+    background-color: #1a202c; /* Slightly darker than previous, closer to pitch black */
+    color: #cbd5e1; /* Default text color */
+    padding: 64px 16px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: monospace, sans-serif; /* Optional: adds a technical feel */
+}
+
+/* Gradient Line from Hero Section */
+.footer-gradient-bar {
+    height: 3px;
+    /* Use the exact gradient from your Hero section */
+    background: linear-gradient(to right, #4f46e5, #0891b2, #0d9488);
+    margin: 0 auto 40px;
+}
+
+/* Main Grid Layout */
+.footer-grid-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr; /* Structured column distribution */
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* General Section Styles */
+.dsa-title {
+    color: #93c5fd; /* Light blue/neon title color */
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+}
+
+/* DSA Project Logo/Icon */
+.dsa-logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.dsa-icon {
+    color: #4f46e5; /* Primary accent color */
+    margin-right: 10px;
+    font-size: 30px;
+}
+
+.dsa-mission-statement {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+.dsa-mission-statement .accent-text {
+    /* Use the primary color from your Hero section */
+    color: #4f46e5; 
+    font-weight: 600; /* Bolding without asterisks */
+    /* Add a subtle text shadow for a modern "neon" pop */
+    text-shadow: 0 0 5px rgba(79, 70, 229, 0.4); 
+}
+
+/* Navigation Links */
+.dsa-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dsa-links li a {
+    color: #e0e7ff; /* Very light text */
+    text-decoration: none;
+    line-height: 2.2;
+    font-size: 15px;
+    transition: color 0.3s, transform 0.2s;
+    display: block; /* Make the whole line clickable */
+}
+
+.dsa-links li a:hover {
+    color: #0891b2; /* Cyan/Teal accent on hover */
+    transform: translateX(5px); /* Subtle modern slide effect */
+}
+
+/* Developer Portfolio Button/Link */
+.portfolio-link-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: #4f46e5; /* Strongest accent color */
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 10px rgba(79, 70, 229, 0.4); /* Neon shadow effect */
+}
+
+.portfolio-link-btn:hover {
+    background-color: #6366f1; /* Slightly lighter on hover */
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0.8);
+}
+
+.portfolio-link-btn svg {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* Social Icons */
+.social-icons-dsa {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.social-icons-dsa a {
+    color: #94a3b8;
+    font-size: 22px;
+    transition: color 0.3s;
+}
+
+/* Hover color matches the gradient's strongest accent */
+.social-icons-dsa a:hover {
+    color: #0d9488; /* Teal accent on hover */
+}
+
+/* Copyright and Dev Status */
+.dev-status {
+    font-size: 13px;
+    color: #0891b2; /* Cyan/Teal for dev status */
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.dev-status svg {
+    margin-right: 5px;
+}
+
+.footer-copyright-dsa {
+    text-align: center;
+    border-top: 1px solid #374151;
+    padding-top: 24px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .footer-grid-container {
+        grid-template-columns: 1fr; /* Stack columns */
+        text-align: center;
+        gap: 30px;
+    }
+
+    .dsa-logo {
+        justify-content: center;
+    }
+    
+    .social-icons-dsa {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    
+    .portfolio-link-btn {
+        margin: 10px auto;
+        display: block; /* Full width button on mobile */
+    }
+    
+    .dsa-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0 20px; /* Horizontal spacing for links */
+    }
+    .dsa-links li a {
+        line-height: 1.5;
+    }
+}

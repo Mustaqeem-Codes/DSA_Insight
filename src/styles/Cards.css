@@ -1,0 +1,127 @@
+.data-structures {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px 80px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  color: #475569;
+  font-size: 16px;
+  margin: 0;
+}
+
+.data-structures-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .data-structures-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .data-structures-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.ds-card {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.ds-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.ds-card-header {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ds-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease;
+}
+
+.ds-card:hover .ds-icon {
+  transform: scale(1.1);
+}
+
+.ds-icon-img {
+  width: 32px;
+  height: 32px;
+  color: white;
+}
+
+.ds-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.ds-card:hover .ds-name {
+  color: #4f46e5;
+}
+
+.ds-description {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.ds-card-content {
+  padding: 0 24px 24px;
+}
+
+.visualize-button {
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.ds-card:hover .visualize-button {
+  background-color: #eef2ff !important;
+  color: #4f46e5 !important;
+}
+
+/* Gradient Classes for Data Structures */
+.blue-gradient { background: linear-gradient(135deg, #3b82f6 0%, #0891b2 100%); }
+.emerald-gradient { background: linear-gradient(135deg, #10b981 0%, #0d9488 100%); }
+.violet-gradient { background: linear-gradient(135deg, #8b5cf6 0%, #4f46e5 100%); }
+.amber-gradient { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+.rose-gradient { background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); }
+.indigo-gradient { background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); }
+.sky-gradient { background: linear-gradient(135deg, #0ea5e9 0%, #0891b2 100%); }
+.green-gradient { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }

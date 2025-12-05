@@ -1,0 +1,138 @@
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 16px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 768px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center; /* Added to center all content */
+}
+
+/* New container for badge to center it properly */
+.hero-badge-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* Updated badge styling - now fits content width */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #e0e7ff;
+  color: #4338ca;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap; /* Prevents text from wrapping */
+  width: fit-content; /* Makes badge width match text */
+  justify-content: center;
+}
+
+.badge-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #0f172a;
+  line-height: 1.2;
+  margin: 0;
+  text-align: center; /* Ensure text is centered */
+}
+
+.hero-gradient-text {
+  display: block;
+  margin-top: 8px;
+  background: linear-gradient(to right, #4f46e5, #0891b2, #0d9488);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 48px;
+  text-align: center; /* Ensure gradient text is centered */
+}
+
+.hero-description {
+  font-size: 20px;
+  color: #475569;
+  line-height: 1.7;
+  margin: 0;
+  text-align: center; /* Ensure description is centered */
+  max-width: 768px; /* Match hero-content width */
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 16px;
+  width: 100%;
+}
+
+/* Button specific styles for hero */
+.hero-buttons .btn {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+}
+
+@media (max-width: 768px) {
+  .hero-title,
+  .hero-gradient-text {
+    font-size: 36px;
+  }
+  
+  .hero-description {
+    font-size: 18px;
+    padding: 0 16px; /* Add padding on mobile */
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 16px; /* Add padding on mobile */
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 300px; /* Limit button width on mobile */
+  }
+  
+  .hero-badge {
+    padding: 8px 16px;
+    font-size: 13px; /* Slightly smaller font on mobile */
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .hero-badge {
+    white-space: normal; /* Allow text to wrap on very small screens */
+    text-align: center;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  
+  .hero-title,
+  .hero-gradient-text {
+    font-size: 28px;
+  }
+  
+  .hero-description {
+    font-size: 16px;
+  }
+}

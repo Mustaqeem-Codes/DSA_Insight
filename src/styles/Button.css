@@ -1,0 +1,85 @@
+/* buttons.css - Fixed button heights */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 8px;
+  min-height: 40px; /* Add minimum height */
+}
+
+.btn:focus {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Fixed height classes */
+.btn-default {
+  height: 40px;
+  padding: 0 16px;
+  line-height: 40px;
+}
+
+.btn-lg {
+  height: 48px; /* Increased from 44px */
+  padding: 0 32px;
+  font-size: 16px;
+  line-height: 48px;
+}
+
+.btn-sm {
+  height: 36px;
+  padding: 0 12px;
+  font-size: 13px;
+  line-height: 36px;
+}
+
+/* Button Variants */
+.btn-primary {
+  background: linear-gradient(to right, #4f46e6, #0891b2);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to right, #4338ca, #0e7490);
+}
+
+.btn-outline {
+  background: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.btn-outline:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #374151;
+  border: 1px solid transparent;
+}
+
+.btn-ghost:hover {
+  background: #f3f4f6;
+}
+
+.button-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+}
