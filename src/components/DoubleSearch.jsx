@@ -7,24 +7,20 @@ const h2 = (key) => 5 - (key % 5);
 
 const doubleSearchCode = [
   { line: "int idx = h1(key);", desc: "Initial hash position." },
-  {
-    line: "int step = h2(key);",
-    desc: "Calculate secondary hash (step size).",
-  },
-  {
-    line: "while (table[(idx + i * step) % size] != EMPTY) {",
-    desc: "Search until an empty slot is hit.",
-  },
-  {
-    line: "  if (table[pos] == key) return pos;",
-    desc: "Match found! Return index.",
-  },
-  { line: "  i++;", desc: "Increment probe counter to jump by step size." },
-  { line: "}", desc: "Hit empty slot; key is not in the table." },
+  { line: "int step = h2(key);", desc: "Calculate secondary hash (step size)." },
+  { line: "int i = 0;", desc: "Initialize probe counter." },
+  { line: "while (table[(idx + i * step) % size] != EMPTY) {", desc: "Search until empty slot hit." },
+  { line: "  if (table[pos] == key) return pos;", desc: "Match found!" },
+  { line: "  i++;", desc: "Increment probe counter." },
+  { line: "}", desc: "Key not found." }
 ];
 
 const DoubleSearch = () => {
-  const [table, setTable] = useState([7, null, 14, 11, null, 5, null]);
+  // Initial state with a collision example: 
+  // 12 % 7 = 5. (But 5 is taken by 5). 
+  // h2(12) = 5 - (12%5) = 3. 
+  // Next probe: (5 + 1*3) % 7 = 1.
+  const [table] = useState([7, 12, 14, null, 11, 5, null]);
   const [inputValue, setInputValue] = useState("");
   const [currentStep, setCurrentStep] = useState(-1);
   const [probingIndex, setProbingIndex] = useState(null);
@@ -61,34 +57,52 @@ const DoubleSearch = () => {
     const currentPos = (baseIdx + probeCount * stepSize) % TABLE_SIZE;
 
     switch (currentStep) {
-      case 0:
-        setCurrentStep(2); // Jump to loop
-        setStatus(`Initial check at index ${currentPos}.`);
+      case 0: // int idx = h1(key)
+        setCurrentStep(1);
+        setStatus(`Initial index calculated: ${baseIdx}`);
         break;
-      case 2:
+      case 1: // int step = h2(key)
+        setCurrentStep(2);
+        setStatus(`Step size (jump) calculated: ${stepSize}`);
+        break;
+      case 2: // int i = 0
+        setCurrentStep(3);
+        setProbingIndex(currentPos);
+        setStatus(`Checking while condition at index ${currentPos}...`);
+        break;
+      case 3: // while check
         if (table[currentPos] === null) {
-          setStatus(`Index ${currentPos} is EMPTY. Key not found.`);
+          setStatus(`Index ${currentPos} is EMPTY. Search failed.`);
           setIsProcessing(false);
-        } else if (table[currentPos] === activeKey) {
-          setStatus(`MATCH FOUND at index ${currentPos}!`);
-          setIsProcessing(false);
+          setIsAutoPlay(false);
         } else {
           setCurrentStep(4);
-          setStatus(
-            `No match at ${currentPos}. Preparing to jump by ${stepSize}.`
-          );
+          setStatus(`Slot ${currentPos} contains ${table[currentPos]}. Checking match...`);
         }
         break;
-      case 4:
+      case 4: // if match
+        if (table[currentPos] === activeKey) {
+          setStatus(`MATCH FOUND at index ${currentPos}!`);
+          setIsProcessing(false);
+          setIsAutoPlay(false);
+        } else {
+          setCurrentStep(5);
+          setStatus(`No match. Preparing next probe.`);
+        }
+        break;
+      case 5: // i++
         const nextI = probeCount + 1;
+        if (nextI >= TABLE_SIZE) {
+            setStatus("Table fully probed. Key not found.");
+            setIsProcessing(false);
+            setIsAutoPlay(false);
+            return;
+        }
         setProbeCount(nextI);
-        setProbingIndex((baseIdx + nextI * stepSize) % TABLE_SIZE);
-        setCurrentStep(2);
-        setStatus(
-          `Probe i=${nextI}. Next index: ${
-            (baseIdx + nextI * stepSize) % TABLE_SIZE
-          }`
-        );
+        const nextPos = (baseIdx + nextI * stepSize) % TABLE_SIZE;
+        setProbingIndex(nextPos);
+        setCurrentStep(3); // Loop back to while check
+        setStatus(`Probe i incremented to ${nextI}. Checking index ${nextPos}.`);
         break;
       default:
         break;
@@ -103,15 +117,22 @@ const DoubleSearch = () => {
             type="number"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            disabled={isProcessing}
             placeholder="Search Key"
           />
-          <button
-            className="btn-insert"
-            onClick={startSearch}
-            disabled={isProcessing}
-          >
+          <button className="btn-insert" onClick={startSearch} disabled={isProcessing}>
             Search
           </button>
+        </div>
+
+        <div className="speed-control">
+          <span>Slow</span>
+          <input 
+            type="range" min="200" max="2000" step="100" 
+            value={2200 - speed} 
+            onChange={(e) => setSpeed(2200 - Number(e.target.value))}
+          />
+          <span>Fast</span>
         </div>
       </div>
 
@@ -119,16 +140,7 @@ const DoubleSearch = () => {
         <div className="table-column">
           <div className="hash-array">
             {table.map((val, i) => (
-              <div
-                key={i}
-                className={`hash-slot ${
-                  probingIndex === i
-                    ? table[i] === activeKey
-                      ? "slot-green"
-                      : "slot-red"
-                    : ""
-                }`}
-              >
+              <div key={i} className={`hash-slot ${probingIndex === i ? (table[i] === activeKey ? "slot-green" : "slot-red") : ""}`}>
                 <span className="slot-idx">{i}</span>
                 <span className="slot-val">{val ?? ""}</span>
               </div>
@@ -141,26 +153,23 @@ const DoubleSearch = () => {
             <div className="cpp-header">double_search.cpp</div>
             <div className="cpp-content">
               {doubleSearchCode.map((lineObj, idx) => (
-                <div
-                  key={idx}
-                  className={`cpp-line ${
-                    currentStep === idx ? "cpp-active" : ""
-                  }`}
-                >
+                <div key={idx} className={`cpp-line ${currentStep === idx ? "cpp-active" : ""}`}>
                   <code>{lineObj.line}</code>
                 </div>
               ))}
             </div>
           </div>
+
           <div className="viz-controls">
-            <button
-              className="ctrl-btn next"
-              onClick={handleNextStep}
-              disabled={!isProcessing}
-            >
+            <button className={`ctrl-btn ${isAutoPlay ? 'active' : ''}`} onClick={() => setIsAutoPlay(!isAutoPlay)} disabled={!isProcessing}>
+              {isAutoPlay ? "⏸ Pause" : "▶ Auto Play"}
+            </button>
+            <button className="ctrl-btn next" onClick={handleNextStep} disabled={!isProcessing || isAutoPlay}>
               Next Step ⏭
             </button>
+            <button className="ctrl-btn stop" onClick={() => window.location.reload()}>🔄 Reset</button>
           </div>
+
           <div className="description-card">
             <div className="desc-header">Double Search Trace</div>
             <div className="desc-content">

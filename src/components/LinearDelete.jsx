@@ -23,7 +23,8 @@ const deleteCppCode = [
 
 const LinearDelete = () => {
   // Initial state with some collisions to make deletion interesting
-  const [table, setTable] = useState([7, 14, 21, 5, null, 12, null]);
+  // 5 hashes to 5. Index 5 is occupied by 12, so it probes to index 6 and finds 5.
+  const [table, setTable] = useState([7, 14, 21, null, null, 12, 5]);
   const [inputValue, setInputValue] = useState("");
   const [currentStep, setCurrentStep] = useState(-1);
   const [probingIndex, setProbingIndex] = useState(null);
@@ -54,49 +55,69 @@ const LinearDelete = () => {
 
   const handleNextStep = () => {
     let h = probingIndex;
+    const initialHash = activeKey % TABLE_SIZE;
 
     switch (currentStep) {
-      case 0: // Calculate hash
+      case 0:
         setCurrentStep(1);
-        setStatus(`Checking if index ${h} is EMPTY...`);
+        setStatus(
+          `Initial Hash: ${activeKey} % ${TABLE_SIZE} = ${h}. Checking slot...`
+        );
         break;
-      case 1: // Loop condition
+
+      case 1: // Loop Condition (The "While" line)
+        // IMPORTANT: In Linear Probing, we only stop if the slot is truly NULL.
         if (table[h] === null) {
-          setStatus(`Index ${h} is EMPTY. Key ${activeKey} not found.`);
+          setStatus(`Index ${h} is NULL. Key ${activeKey} not found.`);
           setIsProcessing(false);
           setIsAutoPlay(false);
         } else {
-          setCurrentStep(2);
-          setStatus(`Slot ${h} contains ${table[h]}. Checking match...`);
+          setCurrentStep(2); // Move to the "If" check
+          setStatus(
+            `Slot ${h} is occupied (or a DEL marker). Checking for match...`
+          );
         }
         break;
-      case 2: // Match check
+
+      case 2: // Match Check
         if (table[h] === activeKey) {
           setCurrentStep(3);
-          setStatus(`Match found! Preparing to mark index ${h} as DELETED.`);
+          setStatus(`MATCH! Found ${activeKey} at index ${h}.`);
         } else {
-          setCurrentStep(6);
-          setStatus(`Not a match. Probing further...`);
+          setCurrentStep(6); // Move to "hash = (hash + 1) % size"
+          setStatus(`${table[h]} is not ${activeKey}. Probing next...`);
         }
         break;
-      case 3: // Marking as deleted
-        setCurrentStep(4);
+
+      case 3: // table[h] = DELETED
         const newTable = [...table];
         newTable[h] = TOMBSTONE;
         setTable(newTable);
-        setStatus(`Index ${h} is now marked as ${TOMBSTONE}.`);
+        setCurrentStep(4);
+        setStatus(`Index ${h} marked as Tombstone (DEL).`);
         break;
-      case 4: // Success
+
+      case 4: // return SUCCESS
+        setStatus(`SUCCESS: Key ${activeKey} deleted.`);
         setIsProcessing(false);
         setIsAutoPlay(false);
-        setStatus(`SUCCESS: Key ${activeKey} removed.`);
         break;
-      case 6: // Probing
+
+      case 6: // Probing logic
         const nextH = (h + 1) % TABLE_SIZE;
-        setProbingIndex(nextH);
-        setCurrentStep(1);
-        setStatus(`Moving to index ${nextH}...`);
+
+        // Safety: If we've probed every single slot and ended up back at the start
+        if (nextH === initialHash) {
+          setStatus("Full table searched. Key not found.");
+          setIsProcessing(false);
+          setIsAutoPlay(false);
+        } else {
+          setProbingIndex(nextH);
+          setCurrentStep(1); // Go back to while check
+          setStatus(`Incrementing index: ${h} -> ${nextH}`);
+        }
         break;
+
       default:
         break;
     }
@@ -124,7 +145,7 @@ const LinearDelete = () => {
         </div>
 
         <div className="speed-control">
-          <span>Fast</span>
+          <span>Slow</span>
           <input
             type="range"
             min="200"
@@ -133,7 +154,7 @@ const LinearDelete = () => {
             value={2200 - speed}
             onChange={(e) => setSpeed(2200 - Number(e.target.value))}
           />
-          <span>Slow</span>
+          <span>Fast</span>
         </div>
       </div>
 

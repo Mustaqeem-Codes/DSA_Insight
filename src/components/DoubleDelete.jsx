@@ -21,7 +21,7 @@ const doubleDeleteCppCode = [
 
 const DoubleDelete = () => {
   // Pre-filled table for demonstration
-  const [table, setTable] = useState([7, "DEL", 14, 11, null, 5, null]);
+  const [table, setTable] = useState([7, "DEL", 14, null, 11, 5, null]);
   const [inputValue, setInputValue] = useState('');
   const [currentStep, setCurrentStep] = useState(-1);
   const [probingIndex, setProbingIndex] = useState(null);
