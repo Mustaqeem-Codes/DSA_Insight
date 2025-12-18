@@ -5,13 +5,13 @@ import {
   Layers,
   ListOrdered,
   Link as LinkIcon,
-  GitBranch,
+  Hash, // Changed from GitBranch to Hash
 } from "lucide-react";
 import "../styles/Cards.css";
 import "../styles/Button.css";
 
 const Cards = () => {
-  const navigate = useNavigate(); // React Router navigation
+  const navigate = useNavigate();
 
   const dataStructures = [
     {
@@ -51,12 +51,12 @@ const Cards = () => {
       path: "/linked-list",
     },
     {
-      id: "binary-search-tree",
-      name: "Binary Search Tree",
-      description: "Hierarchical sorted tree structure",
-      icon: <GitBranch className="ds-icon-img" />,
-      color: "amber-gradient",
-      path: "/bst", // ✅ must be /bst
+      id: "hashing", // Updated ID
+      name: "Hashing", // Updated Name
+      description: "Key-value mapping using Linear Probing", // Updated Description
+      icon: <Hash className="ds-icon-img" />, // Updated Icon
+      color: "rose-gradient", // New color for distinction
+      path: "/hashing", // Matches the route we set in App.jsx
     },
   ];
 

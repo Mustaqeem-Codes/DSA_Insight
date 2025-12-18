@@ -1,0 +1,198 @@
+/* Container & Layout */
+.linear-hashing-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.viz-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.viz-body {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 30px;
+}
+
+/* Input Row Styling */
+.input-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.input-box input {
+  padding: 10px 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+  width: 140px;
+  transition: all 0.2s;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.input-box input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.btn-insert {
+  background: #6366f1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.btn-insert:hover:not(:disabled) {
+  background: #4f46e5;
+}
+
+/* Speed Bar */
+.speed-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Vertical Array List */
+.table-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.hash-array {
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hash-slot {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hash-slot:last-child { border-bottom: none; }
+
+.slot-idx {
+  width: 35px;
+  background: #f8fafc;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  border-right: 1px solid #e2e8f0;
+}
+
+.slot-val { flex: 1; text-align: center; font-weight: 700; font-size: 1.2rem; color: #1e293b; }
+
+/* Dynamic Colors for Hashing/Searching */
+.slot-red { background-color: #fee2e2; border-color: #ef4444; color: #991b1b; }
+.slot-green { background-color: #dcfce7; border-color: #22c55e; color: #166534; }
+
+/* Logic Column (Code + Controls + Description) */
+.logic-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cpp-card, .description-card {
+  width: 100%;
+  background: #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cpp-header, .desc-header {
+  background: #0f172a;
+  color: #64748b;
+  padding: 8px 15px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.cpp-content, .desc-content {
+  padding: 20px;
+  min-height: 120px;
+}
+
+.cpp-line {
+  color: #cbd5e1;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+  padding: 4px 0;
+  transition: all 0.2s;
+}
+
+.cpp-active {
+  color: #fff;
+  background: #334155;
+  box-shadow: inset 4px 0 0 #6366f1;
+  padding-left: 10px;
+}
+
+/* Control Buttons */
+.viz-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.ctrl-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  font-weight: 600;
+  background: white;
+  transition: 0.2s;
+}
+
+.ctrl-btn.active { background: #4f46e5; color: white; border-color: #4f46e5; }
+.ctrl-btn.stop:hover { background: #fee2e2; color: #ef4444; border-color: #fecaca; }
+
+/* Description Card Styling */
+.description-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+}
+
+.description-card .desc-header { background: #e2e8f0; color: #475569; }
+
+.desc-content p {
+  margin: 0;
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1.1rem;
+}
+
+.desc-content small {
+  display: block;
+  margin-top: 10px;
+  color: #64748b;
+  font-style: italic;
+}
