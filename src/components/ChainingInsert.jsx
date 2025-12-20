@@ -60,7 +60,7 @@ const ChainingInsert = () => {
   };
 
   return (
-    <div className="linear-hashing-wrapper">
+    <div className="chaining-viz-container">
       <div className="viz-header">
         <div className="input-box">
           <input
@@ -77,7 +77,7 @@ const ChainingInsert = () => {
       </div>
 
       <div className="viz-body">
-        {/* LEFT COLUMN: Visualization */}
+        {/* LEFT COLUMN */}
         <div className="table-column">
           <div className="chaining-memory-stack">
             {table.map((chain, i) => (
@@ -102,7 +102,7 @@ const ChainingInsert = () => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Code + Controls + Trace */}
+        {/* RIGHT COLUMN */}
         <div className="logic-column">
           <div className="cpp-card">
             <div className="cpp-header">chaining_logic.cpp</div>
