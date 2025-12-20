@@ -119,7 +119,7 @@ const LinearSearch = () => {
         </div>
 
         <div className="speed-control">
-          <span>Fast</span>
+          <span>Slow</span>
           <input
             type="range"
             min="200"
@@ -128,7 +128,7 @@ const LinearSearch = () => {
             value={2200 - speed}
             onChange={(e) => setSpeed(2200 - Number(e.target.value))}
           />
-          <span>Slow</span>
+          <span>Fast</span>
         </div>
       </div>
 
