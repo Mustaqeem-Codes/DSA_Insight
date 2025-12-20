@@ -10,7 +10,7 @@ function Navbar() {
       <div className="nav-left">
         <img src={programmingIcon} alt="Programming Icon" className="nav-icon" />
         <div className="nav-text">
-          <div className="nav-title">DSA Visualizer</div>
+          <div className="nav-title">DSA Visualization</div>
           <div className="nav-tagline">
             Master Data Structures Through Visualization
           </div>

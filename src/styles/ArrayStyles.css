@@ -1,0 +1,116 @@
+/* Horizontal Array Layout */
+.array-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.array-slot-box {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #6366f1;
+  background: white;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.empty-slot {
+  border: 2px dashed #cbd5e1;
+  background: #f1f5f9;
+}
+
+.active-slot {
+  background: #fef3c7 !important;
+  border-color: #f59e0b !important;
+  transform: scale(1.1);
+  z-index: 10;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.array-slot-box .slot-idx {
+  position: absolute;
+  top: -20px;
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: bold;
+}
+
+.array-slot-box .slot-val {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+/* --- Vertical Memory Column --- */
+.memory-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0; /* Contiguous memory */
+  background: #1e293b; 
+  padding: 10px;
+  border-radius: 8px;
+  width: fit-content;
+  margin: 0 auto;
+  border: 4px solid #1e293b;
+}
+
+/* --- Vertical Cell --- */
+.memory-cell-v {
+  width: 120px;
+  height: 50px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  display: flex;
+  flex-direction: row; /* Address on left, Data on right */
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.cell-address-v {
+  width: 35%;
+  background: #334155;
+  color: #94a3b8;
+  font-family: 'monospace';
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #cbd5e1;
+}
+
+.cell-data-v {
+  width: 65%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* --- Vertical Animation States --- */
+.cell-moving-v {
+  background: #38bdf8 !important;
+  transform: translateX(15px); /* Pops out to the right */
+  z-index: 5;
+  border-radius: 4px;
+  border: 2px solid #0ea5e9;
+}
+
+.cell-target-v {
+  background: #fde047 !important;
+  border: 2px solid #eab308;
+}
+
+.cell-empty-v {
+  background: #f1f5f9;
+}
