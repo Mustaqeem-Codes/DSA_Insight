@@ -5,7 +5,7 @@ import {
   Layers,
   ListOrdered,
   Link as LinkIcon,
-  Hash, // Changed from GitBranch to Hash
+  Hash,
 } from "lucide-react";
 import "../styles/Cards.css";
 import "../styles/Button.css";
@@ -51,12 +51,12 @@ const Cards = () => {
       path: "/linked-list",
     },
     {
-      id: "hashing", // Updated ID
-      name: "Hashing", // Updated Name
-      description: "Key-value mapping using Linear Probing", // Updated Description
-      icon: <Hash className="ds-icon-img" />, // Updated Icon
-      color: "rose-gradient", // New color for distinction
-      path: "/hashing", // Matches the route we set in App.jsx
+      id: "hashing",
+      name: "Hashing",
+      description: "Key-value mapping using Linear Probing",
+      icon: <Hash className="ds-icon-img" />,
+      color: "rose-gradient",
+      path: "/hashing",
     },
   ];
 

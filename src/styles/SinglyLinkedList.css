@@ -1,0 +1,326 @@
+/* SinglyLinkedList.css */
+
+/* Main Container */
+.singly-linked-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Main Title */
+.main-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+/* Visualization Area */
+.visualization-area {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  min-height: 200px;
+}
+
+/* List Visualization */
+.list-visualization {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* List Node */
+.list-node {
+  background: white;
+  border-radius: 10px;
+  padding: 25px 20px;
+  min-width: 120px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list-node:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.node-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3498db;
+  margin-bottom: 8px;
+}
+
+.node-pointer {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-bottom: 5px;
+}
+
+.node-next {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: #e74c3c;
+  background: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+/* List Arrow */
+.list-arrow {
+  font-size: 2.5rem;
+  color: white;
+  font-weight: bold;
+  margin: 0 5px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Controls Panel */
+.controls-panel {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.panel-title {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Form Elements */
+.operation-select,
+.value-input,
+.position-input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.operation-select:focus,
+.value-input:focus,
+.position-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.operation-select {
+  background-color: white;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 20px;
+  padding-right: 50px;
+}
+
+.value-input:disabled,
+.position-input:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.insert-button,
+.delete-button {
+  flex: 1;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.insert-button {
+  background: linear-gradient(135deg, #2ecc71, #1abc9c);
+  color: white;
+}
+
+.insert-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #27ae60, #16a085);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+}
+
+.delete-button {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+}
+
+.delete-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+.insert-button:disabled,
+.delete-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Pseudocode Panel */
+.pseudocode-panel {
+  background: #2c3e50;
+  border-radius: 12px;
+  padding: 30px;
+  color: white;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.pseudocode {
+  background: #34495e;
+  padding: 25px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+  border-left: 4px solid #3498db;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .singly-linked-list-container {
+    padding: 15px;
+  }
+  
+  .main-title {
+    font-size: 2rem;
+  }
+  
+  .visualization-area {
+    padding: 20px 10px;
+  }
+  
+  .list-visualization {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .list-node {
+    min-width: 100px;
+  }
+  
+  .list-arrow {
+    transform: rotate(90deg);
+    margin: 10px 0;
+  }
+  
+  .controls-panel,
+  .pseudocode-panel {
+    padding: 20px;
+  }
+  
+  .button-container {
+    flex-direction: column;
+  }
+  
+  .insert-button,
+  .delete-button {
+    width: 100%;
+  }
+}
+
+/* Animation for new nodes */
+@keyframes nodeInsert {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.list-node:last-child {
+  animation: nodeInsert 0.5s ease-out;
+}
+
+/* Empty state */
+.list-visualization:empty::before {
+  content: "Linked List is empty. Add some nodes!";
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+  text-align: center;
+  display: block;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Info Tooltip styles (if you want to add later) */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
