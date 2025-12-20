@@ -1,0 +1,9 @@
+# Allow all web crawlers
+User-agent: *
+Disallow:
+
+# Point to the sitemap
+Sitemap: https://dsa-insight.vercel.app/sitemap.xml
+
+# Optional: Crawl-delay for polite crawling (seconds)
+Crawl-delay: 10
