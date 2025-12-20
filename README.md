@@ -185,6 +185,7 @@ Maintained by:
 
 * **Mustaqeem** – Creator
 * **Abdullah Umar** – Contributor
+* **Zeewaqar** – Contributor
 
 Thanks to everyone who’s helped improve this project! ([GitHub][2])
 
