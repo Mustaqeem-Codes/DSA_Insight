@@ -1,68 +1,142 @@
+/* ChainHashing.css - UPDATED for Perfect Desktop & Mobile Responsiveness */
+
 /* --- Root Container --- */
 .ch-main-wrapper {
-  width: 98%;
-  max-width: 1800px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
-  padding: 20px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.5rem;
   font-family: 'Inter', sans-serif;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
 }
 
 .ch-viz-header {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 15px;
+  padding: 1rem;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
 }
 
 .ch-input-group {
   display: flex;
-  gap: 10px;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 500px;
+  align-items: center;
+}
+
+/* --- Input and Button Styling --- */
+.ch-key-input {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  flex: 1;
+  min-width: 150px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.ch-key-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.ch-key-input:disabled {
+  background: #f1f5f9;
+  cursor: not-allowed;
+}
+
+.ch-btn-insert {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ch-btn-insert:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px -2px rgba(99, 102, 241, 0.3);
+}
+
+.ch-btn-insert:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ch-btn-insert:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 /* --- Layout --- */
 .ch-viz-body {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
-  gap: 80px;
+  gap: 2rem;
   min-height: 450px;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
 }
 
 .ch-table-area {
-  flex: 0 0 35%;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .ch-logic-area {
-  flex: 0 0 35%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1.5rem;
+  width: 100%;
 }
 
 /* --- Chaining Visuals --- */
 .ch-memory-stack {
   width: 100%;
   background: #1e293b;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  overflow-x: auto;
 }
 
 .ch-row-item {
   display: flex;
   align-items: center;
-  height: 60px;
+  min-height: 60px;
   border-bottom: 1px solid #334155;
+  padding: 0.5rem 0;
+  flex-wrap: nowrap;
+}
+
+.ch-row-item:last-child {
+  border-bottom: none;
 }
 
 .ch-bucket-slot {
@@ -70,8 +144,10 @@
   height: 46px;
   display: flex;
   background: white;
-  border: 1px solid #cbd5e1;
+  border: 2px solid #cbd5e1;
+  border-radius: 4px;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .ch-bucket-label {
@@ -81,8 +157,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
-  font-family: monospace;
+  font-size: 0.9rem;
+  font-family: 'Fira Code', monospace;
+  font-weight: 600;
+  border-radius: 4px 0 0 4px;
 }
 
 .ch-bucket-ptr {
@@ -92,31 +170,52 @@
   justify-content: center;
   font-size: 1.5rem;
   color: #38bdf8;
+  font-weight: bold;
 }
 
 .ch-slot-active {
   border: 3px solid #fde047;
   transform: scale(1.05);
   z-index: 2;
+  box-shadow: 0 0 15px rgba(253, 224, 71, 0.3);
 }
 
 .ch-chain-flow {
   display: flex;
   align-items: center;
   overflow-x: auto;
-  padding-left: 10px;
+  padding-left: 1rem;
   flex: 1;
+  min-height: 50px;
+  scrollbar-width: thin;
+  scrollbar-color: #38bdf8 rgba(255, 255, 255, 0.05);
+}
+
+.ch-chain-flow::-webkit-scrollbar {
+  height: 4px;
+}
+
+.ch-chain-flow::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+.ch-chain-flow::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+  border-radius: 2px;
 }
 
 .ch-node-unit {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .ch-node-link {
   color: #38bdf8;
   font-weight: bold;
-  margin: 0 10px;
+  margin: 0 0.75rem;
+  font-size: 1.2rem;
 }
 
 .ch-node-block {
@@ -130,6 +229,8 @@
   justify-content: center;
   font-weight: 800;
   color: #1e293b;
+  font-size: 1rem;
+  flex-shrink: 0;
 }
 
 .ch-node-pop {
@@ -139,10 +240,12 @@
 }
 
 .ch-node-null {
-  margin-left: 15px;
+  margin-left: 1rem;
   color: #64748b;
-  font-family: monospace;
+  font-family: 'Fira Code', monospace;
   font-weight: bold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
 }
 
 /* --- Logic/Code Display --- */
@@ -150,25 +253,37 @@
   background: #282c34;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .ch-cpp-header {
   background: #21252b;
-  padding: 12px 20px;
+  padding: 0.75rem 1.25rem;
   color: #abb2bf;
   font-size: 0.9rem;
   border-bottom: 1px solid #181a1f;
+  font-family: 'Fira Code', monospace;
+  font-weight: 600;
 }
 
 .ch-cpp-content {
-  padding: 15px;
+  padding: 1rem;
+  overflow-x: auto;
 }
 
 .ch-cpp-line {
-  padding: 4px 10px;
+  padding: 0.5rem 1rem;
   border-left: 3px solid transparent;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ch-cpp-line code {
   color: #e06c75;
+  font-family: 'Fira Code', monospace;
 }
 
 .ch-cpp-active {
@@ -176,24 +291,59 @@
   border-left: 3px solid #6366f1;
 }
 
+.ch-cpp-active code {
+  color: #ffffff;
+  font-weight: 500;
+}
+
 /* --- Control Buttons --- */
 .ch-ctrl-group {
   display: flex;
-  gap: 10px;
+  gap: 0.75rem;
+  width: 100%;
 }
 
 .ch-ctrl-btn {
-  padding: 10px 20px;
+  padding: 0.75rem 1.25rem;
   border-radius: 8px;
   border: none;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.ch-next { background: #6366f1; color: white; }
-.ch-reset { background: #64748b; color: white; }
-.ch-ctrl-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.ch-next {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+}
+
+.ch-reset {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(100, 116, 139, 0.2);
+}
+
+.ch-ctrl-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.2);
+}
+
+.ch-ctrl-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ch-ctrl-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
 
 /* --- Trace Card --- */
 .ch-trace-card {
@@ -201,152 +351,438 @@
   background: white;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-top: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .ch-trace-header {
   background: #f8fafc;
-  padding: 10px 20px;
+  padding: 0.75rem 1.25rem;
   border-bottom: 1px solid #e2e8f0;
   font-weight: 700;
   color: #6366f1;
+  font-size: 1rem;
 }
 
 .ch-trace-content {
-  padding: 20px;
+  padding: 1.25rem;
   min-height: 80px;
 }
 
-@keyframes chNodeAnimate {
-  0% { transform: scale(0.5); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-/* --- Input and Button Styling --- */
-
-/* The actual input field */
-.ch-main-wrapper .ch-key-input {
-  padding: 12px 16px;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
+.ch-trace-content p {
+  margin: 0;
   font-size: 1rem;
-  width: 200px;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  line-height: 1.5;
+  color: #1e293b;
 }
 
-.ch-main-wrapper .ch-key-input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+@keyframes chNodeAnimate {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-/* The 'Insert to Chain' button */
-.ch-main-wrapper .ch-btn-insert {
-  padding: 12px 24px;
-  background-color: #6366f1;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
-}
+/* ============================================= */
+/* RESPONSIVE DESIGN - COORDINATED WITH OTHER COMPONENTS */
+/* ============================================= */
 
-.ch-main-wrapper .ch-btn-insert:hover:not(:disabled) {
-  background-color: #4f46e5;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 12px -2px rgba(99, 102, 241, 0.3);
-}
-
-.ch-main-wrapper .ch-btn-insert:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.ch-main-wrapper .ch-btn-insert:disabled {
-  background-color: #94a3b8;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-/* Ensuring the group stays aligned */
-.ch-main-wrapper .ch-input-group {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* --- Responsive Adjustments --- */
-
-/* For Tablets and smaller Desktops (below 1100px) */
-@media (max-width: 1100px) {
-  .ch-viz-body {
-    gap: 30px; /* Reduce gap as screen gets tighter */
+/* === 1024px - Tablet/Laptop === */
+@media (max-width: 1024px) {
+  .ch-main-wrapper {
+    padding: 1.25rem;
+    gap: 1.25rem;
   }
   
-  .ch-table-area, .ch-logic-area {
-    flex: 0 0 48%; /* Slightly wider on mid-size screens */
-  }
-}
-
-/* For Mobile and small Tablets (below 850px) */
-@media (max-width: 850px) {
-  .ch-main-wrapper {
-    padding: 10px;
-  }
-
-  .ch-viz-header {
-    padding: 10px;
-  }
-
-  /* Stack columns vertically */
   .ch-viz-body {
-    flex-direction: column; 
-    gap: 20px;
-    align-items: stretch; /* Make children full width */
+    gap: 1.5rem;
   }
-
-  .ch-table-area, .ch-logic-area {
-    flex: 0 0 100%; /* Take full width when stacked */
-    width: 100%;
-  }
-
-  .ch-input-group {
-    flex-direction: column; /* Stack input and button */
-    width: 100%;
-  }
-
-  .ch-main-wrapper .ch-key-input {
-    width: 100%; /* Input fills screen width */
-  }
-
-  .ch-btn-insert {
-    width: 100%; /* Button fills screen width */
-  }
-
-  /* Allow the memory stack to scroll horizontally if chains are long */
+  
   .ch-memory-stack {
-    overflow-x: auto;
-    padding: 15px;
+    padding: 1.25rem;
   }
-
-  /* Reduce height of rows slightly for small screens */
+  
   .ch-row-item {
-    height: auto;
-    padding: 10px 0;
-    flex-wrap: wrap; /* Let long chains wrap if needed on mobile */
+    min-height: 55px;
+  }
+  
+  .ch-bucket-slot {
+    width: 80px;
+    height: 42px;
+  }
+  
+  .ch-node-block {
+    min-width: 50px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+  
+  .ch-cpp-line {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.9rem;
+  }
+  
+  .ch-ctrl-btn {
+    padding: 0.7rem 1.1rem;
+    font-size: 0.9rem;
   }
 }
 
-/* Fix for very small phones */
-@media (max-width: 480px) {
+/* === 768px - Critical Mobile Breakpoint (Matches Navbar) === */
+@media (max-width: 768px) {
+  .ch-main-wrapper {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  
+  .ch-viz-body {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    min-height: auto;
+  }
+  
+  .ch-table-area,
+  .ch-logic-area {
+    width: 100%;
+  }
+  
+  .ch-input-group {
+    flex-direction: column;
+    max-width: 100%;
+  }
+  
+  .ch-key-input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+  
+  .ch-btn-insert {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+  
+  .ch-memory-stack {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .ch-row-item {
+    min-height: 50px;
+    padding: 0.4rem 0;
+  }
+  
   .ch-bucket-slot {
-    width: 70px; /* Smaller bucket labels */
+    width: 70px;
+    height: 38px;
+  }
+  
+  .ch-bucket-label {
+    font-size: 0.8rem;
+  }
+  
+  .ch-bucket-ptr {
+    font-size: 1.3rem;
   }
   
   .ch-node-block {
     min-width: 45px;
+    height: 34px;
     font-size: 0.9rem;
+  }
+  
+  .ch-node-link {
+    margin: 0 0.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .ch-ctrl-group {
+    flex-direction: column;
+  }
+  
+  .ch-ctrl-btn {
+    width: 100%;
+  }
+}
+
+/* === 600px - Small Mobile (Matches Algorithm Component) === */
+@media (max-width: 600px) {
+  .ch-main-wrapper {
+    padding: 0.75rem;
+    margin-bottom: 1.25rem;
+    border-radius: 6px;
+  }
+  
+  .ch-viz-header {
+    padding: 0.75rem;
+  }
+  
+  .ch-memory-stack {
+    padding: 0.75rem;
+  }
+  
+  .ch-row-item {
+    min-height: 45px;
+    padding: 0.35rem 0;
+  }
+  
+  .ch-bucket-slot {
+    width: 65px;
+    height: 36px;
+  }
+  
+  .ch-bucket-label {
+    font-size: 0.75rem;
+  }
+  
+  .ch-node-block {
+    min-width: 40px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+  
+  .ch-node-link {
+    font-size: 1rem;
+    margin: 0 0.4rem;
+  }
+  
+  .ch-cpp-card {
+    border-radius: 8px;
+  }
+  
+  .ch-cpp-header {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .ch-cpp-content {
+    padding: 0.75rem;
+  }
+  
+  .ch-cpp-line {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .ch-trace-card {
+    border-radius: 8px;
+  }
+  
+  .ch-trace-header {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .ch-trace-content {
+    padding: 1rem;
+  }
+  
+  .ch-trace-content p {
+    font-size: 0.9rem;
+  }
+}
+
+/* === 527px - Critical Small Mobile (Matches Navbar & Algorithm) === */
+@media (max-width: 527px) {
+  .ch-main-wrapper {
+    padding: 0.65rem;
+  }
+  
+  .ch-memory-stack {
+    padding: 0.65rem;
+    border-radius: 6px;
+  }
+  
+  .ch-row-item {
+    min-height: 42px;
+  }
+  
+  .ch-bucket-slot {
+    width: 60px;
+    height: 34px;
+  }
+  
+  .ch-node-block {
+    min-width: 38px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+  
+  .ch-node-link {
+    font-size: 0.9rem;
+    margin: 0 0.3rem;
+  }
+  
+  .ch-cpp-line {
+    padding: 0.3rem 0.65rem;
+    font-size: 0.75rem;
+    white-space: pre-wrap; /* Allow code wrapping on very small screens */
+    word-break: break-word;
+  }
+  
+  .ch-cpp-line code {
+    white-space: pre-wrap;
+  }
+}
+
+/* === 480px - Very Small Mobile === */
+@media (max-width: 480px) {
+  .ch-main-wrapper {
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .ch-viz-header {
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .ch-input-group {
+    gap: 0.5rem;
+  }
+  
+  .ch-key-input {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .ch-btn-insert {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .ch-memory-stack {
+    padding: 0.5rem;
+  }
+  
+  .ch-row-item {
+    min-height: 40px;
+    padding: 0.3rem 0;
+  }
+  
+  .ch-bucket-slot {
+    width: 55px;
+    height: 32px;
+  }
+  
+  .ch-bucket-label {
+    font-size: 0.7rem;
+  }
+  
+  .ch-bucket-ptr {
+    font-size: 1.1rem;
+  }
+  
+  .ch-node-block {
+    min-width: 35px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+  
+  .ch-node-link {
+    font-size: 0.85rem;
+    margin: 0 0.25rem;
+  }
+  
+  .ch-cpp-header {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  
+  .ch-cpp-content {
+    padding: 0.5rem;
+  }
+  
+  .ch-cpp-line {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .ch-ctrl-btn {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+  
+  .ch-trace-header {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  .ch-trace-content {
+    padding: 0.75rem;
+  }
+  
+  .ch-trace-content p {
+    font-size: 0.85rem;
+  }
+}
+
+/* === 360px - Extra Small Mobile === */
+@media (max-width: 360px) {
+  .ch-bucket-slot {
+    width: 50px;
+    height: 30px;
+  }
+  
+  .ch-bucket-label {
+    font-size: 0.65rem;
+  }
+  
+  .ch-node-block {
+    min-width: 32px;
+    height: 26px;
+    font-size: 0.7rem;
+  }
+  
+  .ch-node-link {
+    font-size: 0.8rem;
+  }
+  
+  .ch-cpp-line {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
+  }
+  
+  .ch-ctrl-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+}
+
+/* Prevent horizontal overflow at all screen sizes */
+@media (max-width: 768px) {
+  .ch-main-wrapper {
+    overflow-x: hidden;
+  }
+  
+  .ch-memory-stack,
+  .ch-chain-flow {
+    max-width: 100%;
+  }
+  
+  /* Ensure horizontal scrolling works on touch devices */
+  .ch-chain-flow {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .ch-btn-insert,
+  .ch-ctrl-btn {
+    min-height: 44px; /* Better touch target */
+  }
+  
+  .ch-key-input {
+    font-size: 16px; /* Prevent zoom on iOS */
   }
 }
