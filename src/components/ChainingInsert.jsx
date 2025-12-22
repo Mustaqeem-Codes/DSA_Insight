@@ -60,42 +60,43 @@ const ChainingInsert = () => {
   };
 
   return (
-    <div className="chaining-viz-container">
-      <div className="viz-header">
-        <div className="input-box">
+    <div className="ch-main-wrapper">
+      <div className="ch-viz-header">
+        <div className="ch-input-group">
           <input
             type="number"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             disabled={isProcessing}
             placeholder="Enter Key (e.g. 15)"
+            className="ch-key-input"
           />
-          <button className="btn-insert" onClick={startInsertion} disabled={isProcessing}>
+          <button className="ch-btn-insert" onClick={startInsertion} disabled={isProcessing}>
             Insert to Chain
           </button>
         </div>
       </div>
 
-      <div className="viz-body">
+      <div className="ch-viz-body">
         {/* LEFT COLUMN */}
-        <div className="table-column">
-          <div className="chaining-memory-stack">
+        <div className="ch-table-area">
+          <div className="ch-memory-stack">
             {table.map((chain, i) => (
-              <div key={i} className="chain-row-container">
-                <div className={`chain-array-slot ${activeIdx === i ? "active-bucket" : ""}`}>
-                  <div className="bucket-idx">[{i}]</div>
-                  <div className="bucket-ptr">{chain.length > 0 ? "•" : "/"}</div>
+              <div key={i} className="ch-row-item">
+                <div className={`ch-bucket-slot ${activeIdx === i ? "ch-slot-active" : ""}`}>
+                  <div className="ch-bucket-label">[{i}]</div>
+                  <div className="ch-bucket-ptr">{chain.length > 0 ? "•" : "/"}</div>
                 </div>
-                <div className="chain-list-area">
+                <div className="ch-chain-flow">
                   {chain.map((val, nodeIdx) => (
-                    <div key={nodeIdx} className="node-wrapper">
-                      <div className="node-arrow">→</div>
-                      <div className={`node-box ${currentStep === 3 && activeIdx === i && nodeIdx === 0 ? "node-new" : ""}`}>
+                    <div key={nodeIdx} className="ch-node-unit">
+                      <div className="ch-node-link">→</div>
+                      <div className={`ch-node-block ${currentStep === 3 && activeIdx === i && nodeIdx === 0 ? "ch-node-pop" : ""}`}>
                         {val}
                       </div>
                     </div>
                   ))}
-                  {chain.length > 0 && <div className="node-null">NULL</div>}
+                  {chain.length > 0 && <div className="ch-node-null">NULL</div>}
                 </div>
               </div>
             ))}
@@ -103,28 +104,28 @@ const ChainingInsert = () => {
         </div>
 
         {/* RIGHT COLUMN */}
-        <div className="logic-column">
-          <div className="cpp-card">
-            <div className="cpp-header">chaining_logic.cpp</div>
-            <div className="cpp-content">
+        <div className="ch-logic-area">
+          <div className="ch-cpp-card">
+            <div className="ch-cpp-header">chaining_logic.cpp</div>
+            <div className="ch-cpp-content">
               {chainingCppCode.map((lineObj, idx) => (
-                <div key={idx} className={`cpp-line ${currentStep === idx ? "cpp-active" : ""}`}>
+                <div key={idx} className={`ch-cpp-line ${currentStep === idx ? "ch-cpp-active" : ""}`}>
                   <code>{lineObj.line}</code>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="viz-controls">
-            <button className="ctrl-btn next" onClick={handleNextStep} disabled={!isProcessing}>
+          <div className="ch-ctrl-group">
+            <button className="ch-ctrl-btn ch-next" onClick={handleNextStep} disabled={!isProcessing}>
               Next Step ⏭
             </button>
-            <button className="ctrl-btn stop" onClick={() => window.location.reload()}>🔄 Reset Table</button>
+            <button className="ch-ctrl-btn ch-reset" onClick={() => window.location.reload()}>🔄 Reset Table</button>
           </div>
 
-          <div className="description-card">
-            <div className="desc-header">Execution Trace</div>
-            <div className="desc-content">
+          <div className="ch-trace-card">
+            <div className="ch-trace-header">Execution Trace</div>
+            <div className="ch-trace-content">
               <p>{status}</p>
             </div>
           </div>
