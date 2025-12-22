@@ -30,6 +30,55 @@ const ChainingDelete = () => {
   const [found, setFound] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
+  // Inline style object for header / controls (centralised and responsive-friendly)
+  const styles = {
+    header: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '0.75rem',
+      padding: '0.8rem',
+      borderRadius: '10px',
+      background: '#ffffff',
+      boxShadow: '0 6px 18px rgba(2,6,23,0.04)',
+      border: '1px solid rgba(15,23,42,0.06)'
+    },
+    inputGroup: {
+      display: 'flex',
+      gap: '0.75rem',
+      alignItems: 'center',
+      flexWrap: 'wrap'
+    },
+    input: {
+      padding: '0.55rem 0.75rem',
+      borderRadius: '8px',
+      border: '1px solid #e6eef8',
+      outline: 'none',
+      width: '220px',
+      fontSize: '0.95rem',
+      background: '#fbfcff',
+      color: '#0f172a'
+    },
+    btnInsert: {
+      padding: '0.5rem 0.9rem',
+      borderRadius: '8px',
+      border: 'none',
+      color: 'white',
+      fontWeight: 700,
+      cursor: 'pointer',
+      minWidth: '140px',
+      boxShadow: '0 6px 16px rgba(2,6,23,0.06)'
+    },
+    speedControl: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.6rem',
+      marginTop: '0.4rem'
+    },
+    range: {
+      width: '140px'
+    }
+  };
+  
   // Auto-play logic for consistency with other components
   useEffect(() => {
     let timer;
@@ -140,8 +189,29 @@ const ChainingDelete = () => {
 
   return (
     <div className="ch-main-wrapper">
-      <div className="ch-viz-header">
-        <div className="ch-input-group">
+      {/* responsive media queries for small screens */}
+      <style>{`
+        .ch-viz-header { box-sizing: border-box; }
+        .ch-input-group { box-sizing: border-box; }
+        .ch-key-input { box-sizing: border-box; }
+        .ch-btn-insert { box-sizing: border-box; }
+        @media (max-width: 920px) {
+          .ch-viz-header { padding: 0.6rem; }
+          .ch-input-group { gap: 0.6rem; }
+          .ch-key-input { width: 160px !important; }
+          .ch-logic-area { min-width: 260px !important; }
+        }
+        @media (max-width: 560px) {
+          .ch-input-group { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+          .ch-key-input { width: 100% !important; }
+          .ch-btn-insert { width: 100% !important; }
+          .speed-control { justify-content: space-between; gap: 0.4rem; }
+          .ch-main-wrapper { padding: 0.5rem; }
+        }
+      `}</style>
+
+      <div className="ch-viz-header" style={styles.header}>
+        <div className="ch-input-group" style={styles.inputGroup}>
           <input 
             type="number" 
             value={inputValue} 
@@ -149,23 +219,28 @@ const ChainingDelete = () => {
             placeholder="Enter Key to Delete"
             disabled={isProcessing}
             className="ch-key-input"
+            style={styles.input}
           />
           <button 
             className="ch-btn-insert" 
             onClick={startDelete}
             disabled={isProcessing}
-            style={{ 
-              background: deleted ? '#10b981' : found ? '#f59e0b' : '#ef4444',
-              background: deleted ? 'linear-gradient(135deg, #10b981 0%, #0d9488 100%)' : 
-                         found ? 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' : 
-                         'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)'
+            style={{
+              ...styles.btnInsert,
+              background: deleted
+                ? 'linear-gradient(135deg, #10b981 0%, #0d9488 100%)'
+                : found
+                  ? 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
+                  : 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+              opacity: isProcessing ? 0.9 : 1,
+              cursor: isProcessing ? 'not-allowed' : 'pointer'
             }}
           >
             {deleted ? '✓ Deleted' : found ? 'Found - Delete' : 'Delete from Chain'}
           </button>
         </div>
         
-        <div className="speed-control" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
+        <div className="speed-control" style={styles.speedControl}>
           <span style={{ fontSize: '0.85rem', color: '#64748b' }}>Slow</span>
           <input 
             type="range" 
@@ -174,7 +249,7 @@ const ChainingDelete = () => {
             step="100" 
             value={2200 - speed} 
             onChange={(e) => setSpeed(2200 - Number(e.target.value))}
-            style={{ width: '100px' }}
+            style={styles.range}
           />
           <span style={{ fontSize: '0.85rem', color: '#64748b' }}>Fast</span>
         </div>
