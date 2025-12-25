@@ -29,7 +29,7 @@
 .array3d-delete-inputs {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 32px;
   align-items: flex-end;
 }
 
