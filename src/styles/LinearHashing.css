@@ -895,3 +895,31 @@
   scrollbar-width: thin;
   scrollbar-color: #6366f1 rgba(255, 255, 255, 0.1);
 }
+
+/* HashTableVisualizer.css */
+
+/* Make all slot values black */
+.slot-val {
+  color: black !important;
+  font-weight: 600;
+}
+
+/* Make tombstone values gray with strikethrough */
+.slot-val.tombstone {
+  color: #666 !important;
+  text-decoration: line-through;
+}
+
+/* Ensure active (green/red) slots still show black text */
+.slot-green .slot-val,
+.slot-red .slot-val {
+  color: black !important;
+}
+
+/* For better contrast, you might also want: */
+.slot-val:not(:empty) {
+  background-color: #f8f9fa;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}

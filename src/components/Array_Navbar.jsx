@@ -1,73 +1,100 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import '../styles/Array_Navbar.css';
 
 const Array_Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const path = location.pathname;
 
-  // Logic to determine the active sub-category for Arrays
-  const getBase = () => {
-    // This allows the navbar to work even if you add specific array variants later
-    return { base: '/array', prefix: 'array' }; 
-  };
-
-  const { base, prefix } = getBase();
+  // Determine active structure
+  const is2DArray = path.includes('2d-array');
+  const is3DArray = path.includes('3d-array');
+  const is1DArray = !is2DArray && !is3DArray;
 
   return (
-    <nav className="linear-nav-container">
-      {/* Top Bar: Data Structure / Category */}
-      <div className="nav-top-bar">
-        <div className="nav-section mobile-header">
-          <NavLink to="/" className="algo-btn home-btn">
-            🏠 Home
+    <nav className="array-navbar">
+      {/* Top Bar: Data Structure Selection */}
+      <div className="navbar-top">
+        {/* Left side: Home button and label */}
+        <div className="navbar-left">
+          <NavLink to="/" className="nav-home-btn">
+            <span className="home-icon">🏠</span>
+            Home
           </NavLink>
           
-          <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? '✕' : '☰'}
-          </button>
+          <div className="vertical-separator"></div>
+          
+          <span className="navbar-label">DATA STRUCTURE:</span>
         </div>
 
-        <div className={`nav-section algo-links ${isMenuOpen ? 'show' : ''}`}>
-          <div className="v-separator" />
-          <span className="nav-label">DATA STRUCTURE:</span>
+        {/* Right side: Data Structure Links */}
+        <div className="navbar-structure-links">
           <NavLink 
             to="/array" 
-            className={({ isActive }) => (isActive ? "algo-btn active" : "algo-btn")}
-            onClick={() => setIsMenuOpen(false)}
+            className={({ isActive }) => 
+              `structure-btn ${isActive ? 'structure-btn-active' : ''}`
+            }
           >
-            Fixed Size Array
+            1D Array
           </NavLink>
-          {/* You can add Dynamic Array or 2D Array here later */}
+          
+          <NavLink 
+            to="/2d-array" 
+            className={({ isActive }) => 
+              `structure-btn ${isActive ? 'structure-btn-active' : ''}`
+            }
+          >
+            2D Array
+          </NavLink>
+          
+          <NavLink 
+            to="/3d-array" 
+            className={({ isActive }) => 
+              `structure-btn ${isActive ? 'structure-btn-active' : ''}`
+            }
+          >
+            3D Array
+          </NavLink>
         </div>
       </div>
 
-      {/* Bottom Bar: Array Specific Operations */}
-      <div className="nav-bottom-bar">
-        <div className="nav-section scroll-container">
-          <span className="nav-label">OPERATIONS:</span>
-          <div className="nav-links">
-            <NavLink 
-              to={`${base}/${prefix}-insert`} 
-              className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
+      {/* Bottom Bar: Operations */}
+      <div className="navbar-bottom ops-bar" role="navigation" aria-label="Array operations">
+        <div className="ops-inner">
+          <span className="ops-label">OPS:</span>
+
+          <div className="ops-actions">
+            <NavLink
+              to={`${is2DArray ? '/2d-array' : is3DArray ? '/3d-array' : '/array'}/array-insert`}
+              className={({ isActive }) => `ops-btn insert ${isActive ? 'ops-btn-active' : ''}`}
             >
-              Insertion & Shifting
+              Insert
             </NavLink>
-            <NavLink 
-              to={`${base}/${prefix}-delete`} 
-              className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
+
+            <NavLink
+              to={`${is2DArray ? '/2d-array' : is3DArray ? '/3d-array' : '/array'}/array-delete`}
+              className={({ isActive }) => `ops-btn delete ${isActive ? 'ops-btn-active' : ''}`}
             >
-              Deletion & Shifting
+              Delete
             </NavLink>
-            <NavLink 
-              to={`${base}/${prefix}-search`} 
-              className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
+
+            <NavLink
+              to={`${is2DArray ? '/2d-array' : is3DArray ? '/3d-array' : '/array'}/array-search`}
+              className={({ isActive }) => `ops-btn search ${isActive ? 'ops-btn-active' : ''}`}
             >
-              Searching
+              Search
             </NavLink>
           </div>
         </div>
+      </div>
+
+      {/* Active path indicator */}
+      <div className="navbar-path-indicator">
+        Active: {is2DArray ? '2D Array' : is3DArray ? '3D Array' : '1D Array'} 
+        {path.includes('/insert') ? ' → Insertion' : 
+         path.includes('/delete') ? ' → Deletion' : 
+         path.includes('/search') ? ' → Search' : 
+         ' → Overview'}
       </div>
     </nav>
   );

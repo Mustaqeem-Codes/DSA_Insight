@@ -9,7 +9,7 @@ import Double_Hashing_Page from './Pages/Double_Hashing_Page';
 import Chaining_Hashing_Page from './Pages/Chaining_Hashing_Page';
 
 // --- ARRAY PAGE WRAPPER ---
-import Array_Page from './Pages/Array_Page'; // The new wrapper we created
+import Array_Page from './Pages/Array_Page';
 
 // --- COMPONENT IMPORTS (HASHING) ---
 import LinearHashing from './components/LinearHashing';
@@ -29,10 +29,20 @@ import ChainingSearch from './components/ChainingSearch';
 import ChainingDelete from './components/ChainingDelete';
 
 // --- COMPONENT IMPORTS (ARRAY) ---
+// 1D Array Operations (only the ones that exist)
 import ArrayInsert from './components/ArrayInsert';
 import ArrayDelete from './components/ArrayDelete';
 import ArraySearch from './components/ArraySearch';
-import ArrayTraversal from './components/ArrayTraversal';
+
+// 2D Array Operations  
+import A2D_Array_Insert from './components/A2D_Array_Insert';
+import A2D_Array_Delete from './components/A2D_Array_Delete';
+import A2D_Array_Search from './components/A2D_Array_Search';
+
+// 3D Array Operations
+import A3D_Array_Insert from './components/A3D_Array_Insert';
+import A3D_Array_Delete from './components/A3D_Array_Delete';
+import A3D_Array_Search from './components/A3D_Array_Search';
 
 // --- SINGLY LINKED LIST COMPONENT ---
 import SinglyLinkedList from './components/SinglyLinkedList';
@@ -47,17 +57,31 @@ function App() {
         {/* --- SINGLY LINKED LIST SECTION --- */}
         <Route path="/linked-list" element={<SinglyLinkedList />} />
         
-        {/* --- 1. ARRAY SECTION --- */}
+        {/* --- 1D ARRAY SECTION --- */}
         <Route path="/array" element={<Array_Page />}>
-          {/* Default to Insertion when clicking Array */}
-          <Route index element={<Navigate to="array-insert" replace />} />
-          <Route path="array-insert" element={<ArrayInsert />} />
-          <Route path="array-delete" element={<ArrayDelete />} />
-          <Route path="array-search" element={<ArraySearch />} />
-          <Route path="array-traversal" element={<ArrayTraversal />} />
+          <Route index element={null} /> {/* Shows welcome page */}
+          <Route path="insert" element={<ArrayInsert />} />
+          <Route path="delete" element={<ArrayDelete />} />
+          <Route path="search" element={<ArraySearch />} />
         </Route>
 
-        {/* --- 2. LINEAR PROBING SECTION --- */}
+        {/* --- 2D ARRAY SECTION --- */}
+        <Route path="/2d-array" element={<Array_Page />}>
+          <Route index element={null} /> {/* Shows welcome page */}
+          <Route path="insert" element={<A2D_Array_Insert />} />
+          <Route path="delete" element={<A2D_Array_Delete />} />
+          <Route path="search" element={<A2D_Array_Search />} />
+        </Route>
+
+        {/* --- 3D ARRAY SECTION --- */}
+        <Route path="/3d-array" element={<Array_Page />}>
+          <Route index element={null} /> {/* Shows welcome page */}
+          <Route path="insert" element={<A3D_Array_Insert />} />
+          <Route path="delete" element={<A3D_Array_Delete />} />
+          <Route path="search" element={<A3D_Array_Search />} />
+        </Route>
+
+        {/* --- LINEAR PROBING SECTION --- */}
         <Route path="/hashing" element={<Linear_Hashing_Page />}>
           <Route index element={<Navigate to="linear-insert" replace />} />
           <Route path="linear-insert" element={<LinearHashing />} />
@@ -65,7 +89,7 @@ function App() {
           <Route path="linear-delete" element={<LinearDelete />} />
         </Route>
 
-        {/* --- 3. QUADRATIC PROBING SECTION --- */}
+        {/* --- QUADRATIC PROBING SECTION --- */}
         <Route path="/quadratic" element={<Quadratic_Hashing_Page />}>
           <Route index element={<Navigate to="quad-insert" replace />} />
           <Route path="quad-insert" element={<QuadraticInsert />} />
@@ -73,7 +97,7 @@ function App() {
           <Route path="quad-delete" element={<QuadraticDelete />} />
         </Route>
 
-        {/* --- 4. DOUBLE HASHING SECTION --- */}
+        {/* --- DOUBLE HASHING SECTION --- */}
         <Route path="/double" element={<Double_Hashing_Page />}>
           <Route index element={<Navigate to="double-insert" replace />} />
           <Route path="double-insert" element={<DoubleInsert />} />
@@ -81,7 +105,7 @@ function App() {
           <Route path="double-delete" element={<DoubleDelete />} />
         </Route>
 
-        {/* --- 5. SEPARATE CHAINING SECTION --- */}
+        {/* --- SEPARATE CHAINING SECTION --- */}
         <Route path="/chaining" element={<Chaining_Hashing_Page />}>
           <Route index element={<Navigate to="chaining-insert" replace />} />
           <Route path="chaining-insert" element={<ChainingInsert />} />

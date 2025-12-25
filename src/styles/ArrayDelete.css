@@ -1,18 +1,18 @@
 /* ============================================
-   ARRAY INSERT VISUALIZATION - SCOPED STYLES
-   All classes prefixed with "array-"
+   ARRAY DELETE VISUALIZATION - SCOPED STYLES
+   Reuses same structure as ArrayInsert with different colors
    ============================================ */
 
 /* Main Container */
-.array-insert-container {
+.array-delete-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
   min-height: 100vh;
   padding: 20px;
 }
 
 /* Header Section */
-.array-insert-header {
+.array-delete-header {
   background: white;
   border-radius: 12px;
   padding: 20px;
@@ -23,9 +23,10 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  border-left: 6px solid #ef4444;
 }
 
-.array-insert-inputs {
+.array-delete-inputs {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
@@ -44,29 +45,29 @@
   font-weight: 500;
 }
 
-.array-insert-inputs input {
+.array-delete-inputs input {
   padding: 10px 14px;
   border: 2px solid #d1d5db;
   border-radius: 8px;
   font-size: 1rem;
-  width: 140px;
+  width: 200px;
   transition: all 0.2s ease;
 }
 
-.array-insert-inputs input:focus {
+.array-delete-inputs input:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
-.array-insert-inputs input:disabled {
+.array-delete-inputs input:disabled {
   background-color: #f3f4f6;
   cursor: not-allowed;
 }
 
-.array-insert-btn {
+.array-delete-btn {
   padding: 10px 24px;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -74,15 +75,15 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  min-width: 120px;
+  min-width: 160px;
 }
 
-.array-insert-btn:hover:not(:disabled) {
+.array-delete-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
-.array-insert-btn:disabled {
+.array-delete-btn:disabled {
   background: #9ca3af;
   cursor: not-allowed;
   transform: none;
@@ -112,7 +113,7 @@
   flex: 1;
   height: 6px;
   -webkit-appearance: none;
-  background: linear-gradient(to right, #3b82f6, #ef4444);
+  background: linear-gradient(to right, #ef4444, #3b82f6);
   border-radius: 10px;
   outline: none;
 }
@@ -135,7 +136,7 @@
 }
 
 /* Main Visualization Body */
-.array-insert-viz-body {
+.array-delete-viz-body {
   display: flex;
   gap: 30px;
   min-height: 600px;
@@ -156,7 +157,7 @@
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 2px solid #f3f4f6;
+  border-bottom: 2px solid #fee2e2;
 }
 
 .array-viz-header h3 {
@@ -166,16 +167,16 @@
 }
 
 .array-size-indicator {
-  background: #f3f4f6;
+  background: #fee2e2;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 0.9rem;
-  color: #4b5563;
+  color: #dc2626;
 }
 
 .size-value {
   font-weight: bold;
-  color: #3b82f6;
+  color: #dc2626;
 }
 
 /* Array Memory Row - Horizontal Layout */
@@ -205,11 +206,11 @@
 
 .array-cell-active {
   background: #fef3c7 !important;
-  border-color: #f59e0b !important;
+  border-color: #dc2626 !important;
   transform: translateY(-10px);
   z-index: 10;
-  box-shadow: 0 8px 16px rgba(245, 158, 11, 0.3);
-  animation: pulse-active 1.5s infinite;
+  box-shadow: 0 8px 16px rgba(220, 38, 38, 0.3);
+  animation: pulse-delete 1.5s infinite;
 }
 
 .array-cell-empty {
@@ -260,7 +261,7 @@
   top: -25px;
   left: 50%;
   transform: translateX(-50%);
-  background: #f59e0b;
+  background: #dc2626;
   color: white;
   padding: 4px 10px;
   border-radius: 12px;
@@ -276,9 +277,9 @@
   flex-wrap: wrap;
   gap: 20px;
   padding: 15px;
-  background: #f9fafb;
+  background: #fef2f2;
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #fecaca;
 }
 
 .legend-item {
@@ -296,7 +297,7 @@
 
 .legend-active {
   background: #fef3c7;
-  border-color: #f59e0b;
+  border-color: #dc2626;
 }
 
 .legend-empty {
@@ -374,8 +375,8 @@
 }
 
 .array-code-line-active {
-  background: #eff6ff;
-  border-left-color: #3b82f6;
+  background: #fef2f2;
+  border-left-color: #ef4444;
 }
 
 .code-line-number {
@@ -392,10 +393,10 @@
 .code-line-desc {
   margin-top: 5px;
   padding: 8px;
-  background: #dbeafe;
+  background: #fee2e2;
   border-radius: 6px;
   font-size: 0.9rem;
-  color: #1e40af;
+  color: #b91c1c;
   font-family: inherit;
 }
 
@@ -428,13 +429,13 @@
 }
 
 .array-control-btn-play {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: white;
 }
 
 .array-control-btn-play:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
 .array-control-btn-active {
@@ -516,36 +517,24 @@
 
 .status-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #10b981, #3b82f6);
+  background: linear-gradient(90deg, #ef4444, #3b82f6);
   border-radius: 3px;
   transition: width 0.3s ease;
 }
 
-/* Normalize appearance for controls in this module */
-.array-insert-btn,
-.array-control-btn,
-input[type="range"],
-input,
-button,
-select {
-  appearance: none;          /* standard property */
-  -webkit-appearance: none;  /* webkit */
-  -moz-appearance: none;     /* firefox */
-}
-
 /* Animations */
-@keyframes pulse-active {
+@keyframes pulse-delete {
   0%, 100% {
-    box-shadow: 0 8px 16px rgba(245, 158, 11, 0.3);
+    box-shadow: 0 8px 16px rgba(220, 38, 38, 0.3);
   }
   50% {
-    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.5);
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.5);
   }
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .array-insert-viz-body {
+  .array-delete-viz-body {
     flex-direction: column;
   }
   
@@ -555,17 +544,17 @@ select {
 }
 
 @media (max-width: 768px) {
-  .array-insert-header {
+  .array-delete-header {
     flex-direction: column;
     align-items: stretch;
   }
   
-  .array-insert-inputs {
+  .array-delete-inputs {
     flex-direction: column;
     align-items: stretch;
   }
   
-  .array-insert-inputs input {
+  .array-delete-inputs input {
     width: 100%;
   }
   
@@ -584,13 +573,14 @@ select {
     flex-shrink: 0;
   }
 }
+
 /* ============================================
-   RESPONSIVE DESIGN - ARRAY INSERT
+   RESPONSIVE DESIGN - ARRAY DELETE
    ============================================ */
 
 /* Tablet and Mobile Responsiveness */
 @media (max-width: 1024px) {
-  .array-insert-viz-body {
+  .array-delete-viz-body {
     flex-direction: column;
     gap: 20px;
   }
@@ -600,22 +590,18 @@ select {
     width: 100%;
   }
   
-  .array-insert-header {
+  .array-delete-header {
     padding: 15px;
-  }
-  
-  .array-delete-inputs {
-    gap: 10px;
   }
 }
 
 /* Mobile Devices (≤ 768px) */
 @media (max-width: 768px) {
-  .array-insert-container {
+  .array-delete-container {
     padding: 10px;
   }
   
-  .array-insert-header {
+  .array-delete-header {
     flex-direction: column;
     align-items: stretch;
     gap: 15px;
@@ -623,7 +609,7 @@ select {
     border-radius: 10px;
   }
   
-  .array-insert-inputs {
+  .array-delete-inputs {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
@@ -633,12 +619,12 @@ select {
     width: 100%;
   }
   
-  .array-insert-inputs input {
+  .array-delete-inputs input {
     width: 100%;
     box-sizing: border-box;
   }
   
-  .array-insert-btn {
+  .array-delete-btn {
     width: 100%;
     margin-top: 10px;
   }
@@ -733,7 +719,7 @@ select {
 
 /* Small Mobile Devices (≤ 480px) */
 @media (max-width: 480px) {
-  .array-insert-container {
+  .array-delete-container {
     padding: 8px;
   }
   
@@ -765,18 +751,6 @@ select {
   
   .btn-icon {
     font-size: 1rem;
-  }
-  
-  .result-icon {
-    font-size: 1.5rem;
-  }
-  
-  .result-text h4 {
-    font-size: 1rem;
-  }
-  
-  .result-text p {
-    font-size: 0.9rem;
   }
 }
 

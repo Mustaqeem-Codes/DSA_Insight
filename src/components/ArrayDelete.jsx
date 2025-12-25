@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/ArrayStyles.css"; // Using the new Memory Block styles
+import "../styles/ArrayDelete.css"; // Separate CSS file for this component
 
 const MAX_SIZE = 10;
 
@@ -30,7 +30,7 @@ const ArrayDelete = () => {
       timer = setTimeout(() => handleNextStep(), speed);
     }
     return () => clearTimeout(timer);
-  }, [isAutoPlay, isProcessing, currentStep]);
+  }, [isAutoPlay, isProcessing, currentStep, speed]);
 
   const startDelete = () => {
     const idx = parseInt(deleteIdx);
@@ -92,53 +92,199 @@ const ArrayDelete = () => {
     }
   };
 
+  const resetVisualization = () => {
+    setArray([10, 20, 30, 40, 50, 60, 70, null, null, null]);
+    setLogicalSize(7);
+    setDeleteIdx("");
+    setCurrentStep(-1);
+    setActiveIdx(null);
+    setStatus("Enter index (0-6) to delete an element.");
+    setIsProcessing(false);
+    setIsAutoPlay(false);
+  };
+
   return (
-    <div className="linear-hashing-wrapper">
-      <div className="viz-header">
-        <div className="input-box">
-          <input type="number" value={deleteIdx} onChange={(e) => setDeleteIdx(e.target.value)} placeholder="Index to Delete" disabled={isProcessing} />
-          <button className="btn-insert" style={{backgroundColor: '#ef4444'}} onClick={startDelete} disabled={isProcessing}>Delete</button>
+    <div className="array-delete-container">
+      {/* Header Section with Controls */}
+      <div className="array-delete-header">
+        <div className="array-delete-inputs">
+          <div className="input-group">
+            <label htmlFor="delete-index">Index to Delete (0-{logicalSize - 1})</label>
+            <input 
+              id="delete-index"
+              type="number" 
+              value={deleteIdx} 
+              onChange={(e) => setDeleteIdx(e.target.value)} 
+              placeholder="e.g. 2" 
+              disabled={isProcessing}
+              min="0"
+              max={logicalSize - 1}
+            />
+          </div>
+          <button 
+            className="array-delete-btn" 
+            onClick={startDelete} 
+            disabled={isProcessing}
+          >
+            {isProcessing ? "Processing..." : "Delete Element"}
+          </button>
         </div>
-        <div className="speed-control">
-          <span>Slow</span>
-          <input type="range" min="200" max="2000" step="100" value={2200 - speed} onChange={(e) => setSpeed(2200 - Number(e.target.value))} />
-          <span>Fast</span>
+
+        <div className="array-speed-control">
+          <span className="speed-label">Animation Speed:</span>
+          <div className="speed-slider-container">
+            <span className="speed-min">Slow</span>
+            <input 
+              type="range" 
+              min="200" 
+              max="2000" 
+              step="100" 
+              value={2200 - speed} 
+              onChange={(e) => setSpeed(2200 - Number(e.target.value))}
+              className="speed-slider"
+            />
+            <span className="speed-max">Fast</span>
+          </div>
         </div>
       </div>
 
-      <div className="viz-body">
-        <div className="table-column">
-          <div className="memory-row">
+      {/* Main Visualization Area */}
+      <div className="array-delete-viz-body">
+        {/* Left Column: Array Visualization */}
+        <div className="array-viz-column">
+          <div className="array-viz-header">
+            <h3>Array Memory Visualization</h3>
+            <div className="array-size-indicator">
+              Logical Size: <span className="size-value">{logicalSize}</span> / {MAX_SIZE}
+            </div>
+          </div>
+          
+          <div className="array-memory-row">
             {array.map((val, i) => (
-              <div key={i} className={`memory-cell ${activeIdx === i ? "cell-moving" : ""} ${val === null ? "cell-empty" : ""}`}>
-                <div className="cell-address">[{i}]</div>
-                <div className="cell-data">{val !== null ? val : "null"}</div>
+              <div 
+                key={i} 
+                className={`
+                  array-memory-cell
+                  ${activeIdx === i ? "array-cell-active" : ""}
+                  ${val === null ? "array-cell-empty" : ""}
+                  ${i >= logicalSize ? "array-cell-unused" : ""}
+                `}
+              >
+                <div className="array-cell-address">[{i}]</div>
+                <div className="array-cell-data">
+                  {val !== null ? val : <span className="empty-symbol">∅</span>}
+                </div>
+                {i === activeIdx && (
+                  <div className="array-cell-indicator">
+                    Deleting
+                  </div>
+                )}
               </div>
             ))}
           </div>
+          
+          <div className="array-viz-legend">
+            <div className="legend-item">
+              <div className="legend-color legend-active"></div>
+              <span>Active (Deleting)</span>
+            </div>
+            <div className="legend-item">
+              <div className="legend-color legend-empty"></div>
+              <span>Empty Slot</span>
+            </div>
+            <div className="legend-item">
+              <div className="legend-color legend-unused"></div>
+              <span>Unallocated</span>
+            </div>
+            <div className="legend-item">
+              <div className="legend-color legend-occupied"></div>
+              <span>Occupied</span>
+            </div>
+          </div>
         </div>
 
-        <div className="logic-column">
-          <div className="cpp-card">
-            <div className="cpp-header">array_delete.cpp</div>
-            <div className="cpp-content">
+        {/* Right Column: Code and Controls */}
+        <div className="array-code-column">
+          {/* C++ Code Card */}
+          <div className="array-code-card">
+            <div className="array-code-header">
+              <div className="code-title">array_delete.cpp</div>
+              <div className="code-step">Step {currentStep >= 0 ? currentStep + 1 : 0}/6</div>
+            </div>
+            <div className="array-code-content">
               {arrayDeleteCode.map((lineObj, idx) => (
-                <div key={idx} className={`cpp-line ${currentStep === idx ? "cpp-active" : ""}`}>
-                  <code>{lineObj.line}</code>
+                <div 
+                  key={idx} 
+                  className={`
+                    array-code-line
+                    ${currentStep === idx ? "array-code-line-active" : ""}
+                  `}
+                >
+                  <div className="code-line-number">{idx + 1}</div>
+                  <code className="code-text">{lineObj.line}</code>
+                  {currentStep === idx && (
+                    <div className="code-line-desc">{lineObj.desc}</div>
+                  )}
                 </div>
               ))}
             </div>
           </div>
-          <div className="viz-controls">
-            <button className={`ctrl-btn ${isAutoPlay ? 'active' : ''}`} onClick={() => setIsAutoPlay(!isAutoPlay)} disabled={!isProcessing}>
-              {isAutoPlay ? "⏸ Pause" : "▶ Auto Play"}
+
+          {/* Control Buttons */}
+          <div className="array-control-buttons">
+            <button 
+              className={`array-control-btn ${isAutoPlay ? 'array-control-btn-active' : 'array-control-btn-play'}`}
+              onClick={() => setIsAutoPlay(!isAutoPlay)}
+              disabled={!isProcessing}
+            >
+              {isAutoPlay ? (
+                <>
+                  <span className="btn-icon">⏸</span>
+                  Pause Animation
+                </>
+              ) : (
+                <>
+                  <span className="btn-icon">▶</span>
+                  Auto Play
+                </>
+              )}
             </button>
-            <button className="ctrl-btn next" onClick={handleNextStep} disabled={!isProcessing || isAutoPlay}>Next Step ⏭</button>
-            <button className="ctrl-btn stop" onClick={() => window.location.reload()}>🔄 Reset</button>
+            
+            <button 
+              className="array-control-btn array-control-btn-next"
+              onClick={handleNextStep}
+              disabled={!isProcessing || isAutoPlay}
+            >
+              <span className="btn-icon">⏭</span>
+              Next Step
+            </button>
+            
+            <button 
+              className="array-control-btn array-control-btn-reset"
+              onClick={resetVisualization}
+            >
+              <span className="btn-icon">🔄</span>
+              Reset All
+            </button>
           </div>
-          <div className="description-card">
-            <div className="desc-header">Execution Trace</div>
-            <div className="desc-content"><p>{status}</p></div>
+
+          {/* Status/Description Card */}
+          <div className="array-status-card">
+            <div className="array-status-header">
+              <div className="status-title">Execution Trace</div>
+              <div className="status-step">Step {currentStep + 1}</div>
+            </div>
+            <div className="array-status-content">
+              <p className="status-message">{status}</p>
+              {isProcessing && (
+                <div className="status-progress">
+                  <div 
+                    className="status-progress-bar"
+                    style={{ width: `${((currentStep + 1) / 6) * 100}%` }}
+                  ></div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
